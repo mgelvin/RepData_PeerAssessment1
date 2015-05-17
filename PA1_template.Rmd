@@ -5,7 +5,10 @@ We start by loading the data:
 
 ```{r}
 library(plyr)
-data<-read.csv('activity.csv',colClasses=c('integer','Date','numeric'))
+if (!file.exists('activity.zip')){
+                 file.download('https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip','activity.zip',method='curl')
+}
+data<-read.csv(unz('activity.zip','activity.csv'),colClasses=c('integer','Date','numeric'))
 ```
 
 Removine the na values, and plot a histogram of the total number of steps taken
